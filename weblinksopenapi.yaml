@@ -527,6 +527,16 @@ paths:
                 errors:
                 - title: "Resource not found"
                   code: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+              example:
+                errors:
+                - title: "Rate limit exceeded"
+                  code: 429
         '500':
           description: An unexpected condition was encountered on the server.
           content:
@@ -712,6 +722,16 @@ paths:
                 errors:
                 - title: "Resource not found"
                   code: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+              example:
+                errors:
+                - title: "Rate limit exceeded"
+                  code: 429
         '500':
           description: An unexpected condition was encountered on the server.
           content:
@@ -957,6 +977,16 @@ paths:
                 errors:
                 - title: "Resource not found"
                   code: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+              example:
+                errors:
+                - title: "Rate limit exceeded"
+                  code: 429
         '500':
           description: An unexpected condition was encountered on the server.
           content:
@@ -1229,6 +1259,16 @@ paths:
                 errors:
                 - title: "Resource not found"
                   code: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+              example:
+                errors:
+                - title: "Rate limit exceeded"
+                  code: 429
         '500':
           description: An unexpected condition was encountered on the server.
           content:
@@ -1502,6 +1542,16 @@ paths:
                 errors:
                 - title: "Resource not found"
                   code: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+              example:
+                errors:
+                - title: "Rate limit exceeded"
+                  code: 429
         '500':
           description: An unexpected condition was encountered on the server.
           content:
@@ -1686,6 +1736,16 @@ paths:
                 errors:
                 - title: "Resource not found"
                   code: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+              example:
+                errors:
+                - title: "Rate limit exceeded"
+                  code: 429
         '500':
           description: An unexpected condition was encountered on the server.
           content:
