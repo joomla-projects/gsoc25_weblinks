@@ -55,37 +55,33 @@ class Weblinks extends CMSPlugin
         $router->createCRUDRoutes(
             'v1/weblinks/categories',
             'categories',
-            ['component' => 'com_categories', 'extension' => 'com_weblinks'],
-            $isPublic // <-- Only GET is public
+            ['component' => 'com_categories', 'extension' => 'com_weblinks']
         );
 
-        $this->createFieldsRoutes($router, $isPublic);
+        $this->createFieldsRoutes($router);
     }
 
     /**
      * Create fields routes
      *
      * @param   ApiRouter  &$router  The API Routing object
-     * @param   boolean    $isPublic  Indicates if the routes are public
      *
      * @return  void
      *
      * @since   __DEPLOY_VERSION__
      */
-    private function createFieldsRoutes(&$router, $isPublic)
+    private function createFieldsRoutes(&$router)
     {
         $router->createCRUDRoutes(
             'v1/fields/weblinks',
             'fields',
-            ['component' => 'com_fields', 'context' => 'com_weblinks.weblink'],
-            $isPublic // <-- Only GET is public
+            ['component' => 'com_fields', 'context' => 'com_weblinks.weblink']
         );
 
         $router->createCRUDRoutes(
             'v1/fields/groups/weblinks',
             'groups',
-            ['component' => 'com_fields', 'context' => 'com_weblinks.weblink'],
-            $isPublic // <-- Only GET is public
+            ['component' => 'com_fields', 'context' => 'com_weblinks.weblink']
         );
     }
 }
