@@ -176,7 +176,7 @@ class Weblinks extends CMSPlugin
 
         // Calculate remaining requests and reset time
         $remainingRequests = $maxRequests - $rateData['count'];
-        $resetTime = $rateData['start'] + $windowSeconds;
+        $resetTime         = $rateData['start'] + $windowSeconds;
 
         // Set rate-limiting headers
         $this->setRateLimitHeaders($remainingRequests, $resetTime);
@@ -233,7 +233,7 @@ class Weblinks extends CMSPlugin
 
         // Calculate remaining requests and reset time
         $remainingRequests = $maxRequests - $rateData['count'];
-        $resetTime = $rateData['start'] + $windowSeconds;
+        $resetTime         = $rateData['start'] + $windowSeconds;
 
         // Set rate-limiting headers
         $this->setRateLimitHeaders($remainingRequests, $resetTime);
