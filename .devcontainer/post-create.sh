@@ -15,6 +15,8 @@ ADMIN_EMAIL="admin@example.org"
 WORKSPACE_ROOT="/workspaces/weblinks-codespaces"
 JOOMLA_ROOT="/var/www/html"
 
+git config --global --add safe.directory $WORKSPACE_ROOT
+
 # --- 1. Wait for MariaDB ---
 echo "--> Waiting for MariaDB..."
 while ! mysqladmin ping -h"mysql" --silent; do
@@ -24,7 +26,7 @@ done
 # --- 2. Install Dependencies ---
 echo "--> Installing dependencies..."
 composer install
-npm install -g npm@latest
+npm install
 
 # --- 3. Build Extension ---
 echo "--> Building extension..."
@@ -76,7 +78,7 @@ cp $PMA_ROOT/config.sample.inc.php $PMA_ROOT/config.inc.php
 sed -i "/\['AllowNoPassword'\] = false/a \$cfg['Servers'][\$i]['host'] = 'mysql';" $PMA_ROOT/config.inc.php
 
 # --- 7. Codespaces Fix ---
-echo "--> Applying Codespaces fix (Redirect Any localhost Request to Codespace URL) ..."
+echo "--> Applying Codespaces fix..."
 
 cat > $JOOMLA_ROOT/fix.php << 'EOF'
 <?php
@@ -94,9 +96,13 @@ sed -i '2i require_once __DIR__ . "/fix.php";' $JOOMLA_ROOT/index.php
 sed -i '2i require_once __DIR__ . "/../fix.php";' $JOOMLA_ROOT/administrator/index.php
 
 
-# --- 8. Finalize ---
-echo "--> Finalizing setup..."
+# --- 8. Finalize and setup Cypress ---
+echo "--> Finalizing and setting up Cypress..."
+git update-index --assume-unchanged ./node_modules/.bin/cypress
+chmod +x ./node_modules/.bin/cypress
 chown -R www-data:www-data $JOOMLA_ROOT
+npx cypress install
+cp cypress.config.dist.js cypress.config.js
 service apache2 restart
 
 # Save details
@@ -120,9 +126,8 @@ DETAILS_FILE="${WORKSPACE_ROOT}/codespace-details.txt"
     echo "  Password: joomla_ut"
     echo ""
     echo "To use cypress testing"
-    echo "  1. Open 'Cypress GUI' port."
-    echo "  2. Install Cypress using 'npx cypress install."
-    echo "  3. Run Interactive Cypress using 'npx cypress open' and you should see cypress on 'Cypress GUI' port page."
-    echo "  You can also run Headless tests using 'npx cypress run"
+    echo "  Open 'Cypress GUI' port."
+    echo "  Run Interactive Cypress using 'npx cypress open' and you should see cypress on 'Cypress GUI' port page."
+    echo "  You can also run Headless tests using 'npx cypress run'"
     echo "---"
 } | tee "$DETAILS_FILE"
