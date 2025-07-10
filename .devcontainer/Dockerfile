@@ -36,6 +36,8 @@ RUN apt-get update && apt-get install -y \
     apt-get install -y nodejs && \
     # Install Composer globally
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    # Install Xdebug
+    pecl install xdebug && \
     # Enable Apache's rewrite module and set the ServerName to prevent warnings
     a2enmod rewrite && \
     echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
