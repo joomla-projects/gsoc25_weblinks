@@ -98,6 +98,7 @@ class WeblinksHelper
 
         if ($category) {
             $tree           = new \stdClass();
+            $tree->level    = $level;
             $tree->category = $category;
             $tree->weblinks = $this->getCategoryWeblinks($category->id, $params, $app);
             $tree->children = [];

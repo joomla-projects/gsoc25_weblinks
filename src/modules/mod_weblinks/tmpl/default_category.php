@@ -14,10 +14,6 @@
 
 use Joomla\CMS\Helper\ModuleHelper;
 
-if (!isset($firstRender)) {
-    static $firstRender = true;
-}
-
 if (!$categoryNode) {
     return;
 }
@@ -44,13 +40,11 @@ $skipContent = $isRootCategory && $hideParent;
 if ($hasWeblinks && !$skipContent) {
     $cssClass = 'weblinks-category';
 
-    // Apply padding only if this is NOT the first category.
-    if (!$firstRender) {
+    // Apply padding based on the nesting level. Level 0 is the root.
+    $firstDisplayedLevel = $hideParent ? 1 : 0;
+    if ($categoryNode->level > $firstDisplayedLevel) {
         $cssClass .= ' ps-4';
     }
-
-    // To apply padding for the rest of the categories.
-    $firstRender = false;
 
     // Echo the opening tag BEFORE processing children.
     echo '<div class="' . $cssClass . '">';
